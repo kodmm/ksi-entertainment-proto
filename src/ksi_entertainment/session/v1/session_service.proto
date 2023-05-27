@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package ksi_entertainment.session.v1;
+
+import "google/protobuf/timestamp.proto";
+
+option go_package = "github.com/kodmm/ksi-entertainment-proto/go/ksi_entertainment/session";
+
+message CreateSessionRequest {
+  uint32 user_id = 1;
+}
+
+message CreateSessionResponse {
+  string ksid = 1;
+  google.protobuf.Timestamp expires = 2;
+}
+
+service SessionService {
+  rpc CreateSession(CreateSessionRequest) returns (CreateSessionResponse) {}
+}
