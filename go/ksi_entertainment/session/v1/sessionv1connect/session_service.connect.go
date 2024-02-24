@@ -2,13 +2,13 @@
 //
 // Source: ksi_entertainment/session/v1/session_service.proto
 
-package sessionconnect
+package sessionv1connect
 
 import (
 	context "context"
 	errors "errors"
 	connect_go "github.com/bufbuild/connect-go"
-	session "github.com/kodmm/ksi-entertainment-proto/go/ksi_entertainment/session"
+	v1 "github.com/kodmm/ksi-entertainment-proto/go/ksi_entertainment/session/v1"
 	http "net/http"
 	strings "strings"
 )
@@ -40,7 +40,7 @@ const (
 
 // SessionServiceClient is a client for the ksi_entertainment.session.v1.SessionService service.
 type SessionServiceClient interface {
-	CreateSession(context.Context, *connect_go.Request[session.CreateSessionRequest]) (*connect_go.Response[session.CreateSessionResponse], error)
+	CreateSession(context.Context, *connect_go.Request[v1.CreateSessionRequest]) (*connect_go.Response[v1.CreateSessionResponse], error)
 }
 
 // NewSessionServiceClient constructs a client for the ksi_entertainment.session.v1.SessionService
@@ -53,7 +53,7 @@ type SessionServiceClient interface {
 func NewSessionServiceClient(httpClient connect_go.HTTPClient, baseURL string, opts ...connect_go.ClientOption) SessionServiceClient {
 	baseURL = strings.TrimRight(baseURL, "/")
 	return &sessionServiceClient{
-		createSession: connect_go.NewClient[session.CreateSessionRequest, session.CreateSessionResponse](
+		createSession: connect_go.NewClient[v1.CreateSessionRequest, v1.CreateSessionResponse](
 			httpClient,
 			baseURL+SessionServiceCreateSessionProcedure,
 			opts...,
@@ -63,18 +63,18 @@ func NewSessionServiceClient(httpClient connect_go.HTTPClient, baseURL string, o
 
 // sessionServiceClient implements SessionServiceClient.
 type sessionServiceClient struct {
-	createSession *connect_go.Client[session.CreateSessionRequest, session.CreateSessionResponse]
+	createSession *connect_go.Client[v1.CreateSessionRequest, v1.CreateSessionResponse]
 }
 
 // CreateSession calls ksi_entertainment.session.v1.SessionService.CreateSession.
-func (c *sessionServiceClient) CreateSession(ctx context.Context, req *connect_go.Request[session.CreateSessionRequest]) (*connect_go.Response[session.CreateSessionResponse], error) {
+func (c *sessionServiceClient) CreateSession(ctx context.Context, req *connect_go.Request[v1.CreateSessionRequest]) (*connect_go.Response[v1.CreateSessionResponse], error) {
 	return c.createSession.CallUnary(ctx, req)
 }
 
 // SessionServiceHandler is an implementation of the ksi_entertainment.session.v1.SessionService
 // service.
 type SessionServiceHandler interface {
-	CreateSession(context.Context, *connect_go.Request[session.CreateSessionRequest]) (*connect_go.Response[session.CreateSessionResponse], error)
+	CreateSession(context.Context, *connect_go.Request[v1.CreateSessionRequest]) (*connect_go.Response[v1.CreateSessionResponse], error)
 }
 
 // NewSessionServiceHandler builds an HTTP handler from the service implementation. It returns the
@@ -95,6 +95,6 @@ func NewSessionServiceHandler(svc SessionServiceHandler, opts ...connect_go.Hand
 // UnimplementedSessionServiceHandler returns CodeUnimplemented from all methods.
 type UnimplementedSessionServiceHandler struct{}
 
-func (UnimplementedSessionServiceHandler) CreateSession(context.Context, *connect_go.Request[session.CreateSessionRequest]) (*connect_go.Response[session.CreateSessionResponse], error) {
+func (UnimplementedSessionServiceHandler) CreateSession(context.Context, *connect_go.Request[v1.CreateSessionRequest]) (*connect_go.Response[v1.CreateSessionResponse], error) {
 	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("ksi_entertainment.session.v1.SessionService.CreateSession is not implemented"))
 }
