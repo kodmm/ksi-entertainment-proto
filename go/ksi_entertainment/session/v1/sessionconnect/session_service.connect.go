@@ -2,7 +2,7 @@
 //
 // Source: ksi_entertainment/session/v1/session_service.proto
 
-package sessionv1connect
+package sessionconnect
 
 import (
 	context "context"
