@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package ksi_entertainment.session.v1;
 
-option go_package = "github.com/kodmm/ksi-entertainment-proto/go/ksi_entertainment/session";
+option go_package = "github.com/kodmm/ksi-entertainment-proto/go/ksi_entertainment/session/v1;sessionv1";
 
 message CreateSessionRequest {
 	uint32 user_id = 1;
