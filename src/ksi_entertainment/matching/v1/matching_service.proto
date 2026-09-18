@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+package ksi_entertainment.matching.v1;
+
+option go_package = "github.com/kodmm/ksi-entertainment-proto/go/ksi_entertainment/matching/v1;matchingv1";
+
+message MatchingCandidate {
+	uint32 user_id = 1;
+	string artist_name = 2;
+}
+
+message ListMatchingCandidatesRequest {
+	uint32 user_id = 1;
+}
+
+message ListMatchingCandidatesResponse {
+	repeated MatchingCandidate candidates = 1;
+}
+
+message SendMatchingRequestRequest {
+	uint32 user_id = 1;
+	uint32 target_user_id = 2;
+}
+
+message SendMatchingRequestResponse {
+	bool success = 1;
+}
+
+service MatchingService {
+	rpc ListMatchingCandidates(ListMatchingCandidatesRequest) returns (ListMatchingCandidatesResponse) {}
+	rpc SendMatchingRequest(SendMatchingRequestRequest) returns (SendMatchingRequestResponse) {}
+}

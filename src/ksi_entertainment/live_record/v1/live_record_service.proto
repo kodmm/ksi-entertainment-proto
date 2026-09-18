@@ -1,0 +1,71 @@
+syntax = "proto3";
+
+package ksi_entertainment.live_record.v1;
+
+option go_package = "github.com/kodmm/ksi-entertainment-proto/go/ksi_entertainment/live_record/v1;live_recordv1";
+
+message LiveRecord {
+	uint32 id = 1;
+	uint32 user_id = 2;
+	string artist_name = 3;
+	string venue = 4;
+	string event_date = 5;
+	string note = 6;
+	string card_image_url = 7;
+}
+
+message CreateLiveRecordRequest {
+	uint32 user_id = 1;
+	string artist_name = 2;
+	string venue = 3;
+	string event_date = 4;
+	string note = 5;
+	string card_image_url = 6;
+}
+
+message CreateLiveRecordResponse {
+	LiveRecord live_record = 1;
+}
+
+message GetLiveRecordRequest {
+	uint32 id = 1;
+}
+
+message GetLiveRecordResponse {
+	LiveRecord live_record = 1;
+}
+
+message ListLiveRecordsRequest {
+	uint32 user_id = 1;
+}
+
+message ListLiveRecordsResponse {
+	repeated LiveRecord live_records = 1;
+}
+
+message UpdateLiveRecordRequest {
+	uint32 id = 1;
+	string artist_name = 2;
+	string venue = 3;
+	string event_date = 4;
+	string note = 5;
+	string card_image_url = 6;
+}
+
+message UpdateLiveRecordResponse {
+	LiveRecord live_record = 1;
+}
+
+message DeleteLiveRecordRequest {
+	uint32 id = 1;
+}
+
+message DeleteLiveRecordResponse {}
+
+service LiveRecordService {
+	rpc CreateLiveRecord(CreateLiveRecordRequest) returns (CreateLiveRecordResponse) {}
+	rpc GetLiveRecord(GetLiveRecordRequest) returns (GetLiveRecordResponse) {}
+	rpc ListLiveRecords(ListLiveRecordsRequest) returns (ListLiveRecordsResponse) {}
+	rpc UpdateLiveRecord(UpdateLiveRecordRequest) returns (UpdateLiveRecordResponse) {}
+	rpc DeleteLiveRecord(DeleteLiveRecordRequest) returns (DeleteLiveRecordResponse) {}
+}
